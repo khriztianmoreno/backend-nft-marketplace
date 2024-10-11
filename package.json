@@ -13,16 +13,10 @@
     "type-check": "tsc --noEmit",
     "prepare": "husky"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/khriztianmoreno/backend-nft-marketplace.git"
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "express": "^5.0.1"
   },
-  "author": "Cristian Moreno",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/khriztianmoreno/backend-nft-marketplace/issues"
-  },
-  "homepage": "https://github.com/khriztianmoreno/backend-nft-marketplace#readme",
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "@commitlint/cli": "^19.5.0",
@@ -31,6 +25,7 @@
     "@types/node": "^22.7.5",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
+    "prisma": "^5.20.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
   },
@@ -38,5 +33,15 @@
     "*": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/khriztianmoreno/backend-nft-marketplace/issues"
+  },
+  "homepage": "https://github.com/khriztianmoreno/backend-nft-marketplace#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khriztianmoreno/backend-nft-marketplace.git"
+  },
+  "author": "Cristian Moreno",
+  "license": "MIT"
 }
