@@ -1,10 +1,12 @@
-import express, { Application } from 'express';
+import cors from 'cors';
+import express, { type Application } from 'express';
+import morgan from 'morgan';
 
 function configExpress(app: Application): void {
-  // Interceptar todos los request antes de que lleguen a la ruta
+  app.use(cors());
   app.use(express.json());
+  app.use(morgan('dev'));
 
-  // cors
   // morgan
   // urlencoded
 }
