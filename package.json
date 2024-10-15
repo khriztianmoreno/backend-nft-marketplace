@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "backend for nft marketplace",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc",
     "check": "biome check --write ./src",
