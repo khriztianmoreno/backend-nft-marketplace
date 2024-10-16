@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { isAuthenticated } from '../../auth/auth.controller';
+import { isAuthenticated } from '@auth/auth.controller';
 import {
   createNoteHandler,
   deleteNoteHandler,

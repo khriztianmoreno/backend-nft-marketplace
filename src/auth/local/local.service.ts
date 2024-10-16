@@ -1,5 +1,5 @@
-import type { User } from '../../api/user/user.type';
-import { signToken } from '../auth.service';
+import type { User } from '@api/user/user.type';
+import { signToken } from '@auth/auth.service';
 
 export function createAuthResponse(input: User) {
   const payload = {

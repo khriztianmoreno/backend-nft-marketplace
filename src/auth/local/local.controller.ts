@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 
-import { getUserByEmail } from '../../api/user/user.service';
-import { comparePassword } from '../utils/crypto';
+import { getUserByEmail } from '@api/user/user.service';
+import { comparePassword } from '@auth/utils/crypto';
 import { createAuthResponse } from './local.service';
 
 export async function loginHandler(req: Request, res: Response) {
