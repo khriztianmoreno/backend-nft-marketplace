@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { isAuthenticated } from '../../auth/auth.controller';
 import {
   createNoteHandler,
   deleteNoteHandler,
@@ -12,7 +13,7 @@ const router = Router();
 
 router.get('/', getAllNotesHandler);
 router.get('/:id', getOneNoteHandler);
-router.delete('/:id', deleteNoteHandler);
+router.delete('/:id', isAuthenticated, deleteNoteHandler);
 router.post('/', createNoteHandler);
 router.patch('/:id', updateNoteHandler);
 

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 
 import {
   createNote,
@@ -7,12 +7,12 @@ import {
   getOneNoteById,
   updateNoteById,
 } from './note.service';
-import { Note } from './note.type';
+import type { Note } from './note.type';
 
 export async function getAllNotesHandler(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   const notes = await getAllNotes();
   res.json(notes);
@@ -36,7 +36,7 @@ export async function deleteNoteHandler(req: Request, res: Response) {
 
   const confirmTransaction = await deleteNoteById(id);
 
-  res.status(200).json(confirmTransaction)
+  res.status(200).json(confirmTransaction);
 }
 
 export async function createNoteHandler(req: Request, res: Response) {

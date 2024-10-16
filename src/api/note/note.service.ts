@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-import { Note } from './note.type';
+import type { Note } from './note.type';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export async function getAllNotes(): Promise<Note[]> {
   const notes = await prisma.note.findMany();
@@ -12,24 +12,24 @@ export async function getAllNotes(): Promise<Note[]> {
 export async function getOneNoteById(id: string): Promise<Note | null> {
   const note = await prisma.note.findUnique({
     where: { id },
-  })
-  return note
+  });
+  return note;
 }
 
 export async function deleteNoteById(id: string): Promise<Note> {
   const noteDeleted = prisma.note.delete({
-    where: {id}
-  })
+    where: { id },
+  });
 
-  return noteDeleted
+  return noteDeleted;
 }
 
 export async function createNote(note: Note): Promise<Note> {
   const newNote = await prisma.note.create({
-    data: note
-  })
+    data: note,
+  });
 
-  return newNote
+  return newNote;
 }
 
 export async function updateNoteById(
@@ -39,7 +39,7 @@ export async function updateNoteById(
   const noteUpdated = await prisma.note.update({
     where: { id },
     data: noteToUpdate,
-  })
+  });
 
-  return noteUpdated
+  return noteUpdated;
 }
