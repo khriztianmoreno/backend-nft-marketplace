@@ -43,3 +43,24 @@ export async function getUserByEmail(email: string) {
 
   return user;
 }
+
+export async function getUserByToken(token: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      passwordResetToken: token,
+    },
+  });
+
+  return user;
+}
+
+export async function updateUser(data: User) {
+  const user = await prisma.user.update({
+    where: {
+      id: data.id,
+    },
+    data,
+  });
+
+  return user;
+}

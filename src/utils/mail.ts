@@ -2,16 +2,35 @@ import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import sgMail from '@sendgrid/mail';
 
+async function fakeTransporter() {
+  // Fake service for testing
+  const testAccount = await nodemailer.createTestAccount();
+
+  // 1. crear el transport -> requiere de un servicio de correo
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass, // generated ethereal password
+    },
+  });
+
+  return transporter;
+}
+
 function gmailTransporter() {
-  const hostname = process.env.SMTP_SERVER;
-  const port = Number(process.env.SMTP_PORT) as number;
-  const username = process.env.SMTP_USER;
+  const hostname = process.env.SMTP_HOST;
+  const port = process.env.SMTP_PORT;
+  const username = process.env.SMTP_USERNAME;
   const password = process.env.SMTP_PASSWORD;
 
+  // Send Email
   const transporter = nodemailer.createTransport({
     host: hostname,
     port,
-    secure: true,
+    secure: false,
     auth: {
       user: username,
       pass: password,
@@ -24,13 +43,15 @@ function gmailTransporter() {
 export async function sendEmail(message: Mail.Options) {
   const transporter = gmailTransporter();
   const info = await transporter.sendMail(message);
+  console.log("🚀 ~ sendEmail ~ info:", info)
 
   return info;
 }
 
-export function sendMailSendGrid(data: sgMail.MailDataRequired) {
+export async function sendMailSendgrid(data: sgMail.MailDataRequired) {
   const apiKey = process.env.SENDGRID_API_KEY as string;
   sgMail.setApiKey(apiKey);
 
-  return sgMail.send(data);
+  const result = await sgMail.send(data);
+  console.log("🚀 ~ sendMailSendgrid ~ result:", result)
 }
