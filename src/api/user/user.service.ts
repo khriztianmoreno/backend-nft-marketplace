@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import { add } from 'date-fns';
 
-import { hashPassword } from '../../auth/utils/crypto';
+import { createHashToken, hashPassword } from '@auth/utils/crypto';
 import type { User } from './user.type';
 
 const prisma = new PrismaClient();
@@ -16,12 +17,14 @@ export async function createUser(input: User) {
   }
 
   const hashedPassword = await hashPassword(input.password);
+  const currentDate = new Date();
+  const expiresIn = add(currentDate, { days: 1 });
 
   const data: User = {
     ...input,
     password: hashedPassword,
-    // passwordResetToken
-    // passwordResetTokenExpiry
+    passwordResetToken: createHashToken(input.email),
+    passwordResetTokenExpiry: expiresIn
   };
 
   const newUser = await prisma.user.create({

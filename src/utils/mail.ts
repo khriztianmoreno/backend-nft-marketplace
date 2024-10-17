@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import sgMail from '@sendgrid/mail';
 
 function gmailTransporter() {
   const hostname = process.env.SMTP_SERVER;
@@ -25,4 +26,11 @@ export async function sendEmail(message: Mail.Options) {
   const info = await transporter.sendMail(message);
 
   return info;
+}
+
+export function sendMailSendGrid(data: sgMail.MailDataRequired) {
+  const apiKey = process.env.SENDGRID_API_KEY as string;
+  sgMail.setApiKey(apiKey);
+
+  return sgMail.send(data);
 }

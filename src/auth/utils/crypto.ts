@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import crypto from 'node:crypto';
 
 /**
  * Hash password
@@ -30,4 +31,8 @@ export function comparePassword(
   hashedPassword: string,
 ): Promise<boolean> {
   return bcrypt.compare(password, hashedPassword);
+}
+
+export function createHashToken(data: string) {
+  return crypto.createHash('sha256').update(data).digest('hex');
 }
