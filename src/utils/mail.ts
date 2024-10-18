@@ -1,6 +1,6 @@
-import nodemailer from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
 import sgMail from '@sendgrid/mail';
+import nodemailer from 'nodemailer';
+import type Mail from 'nodemailer/lib/mailer';
 
 async function fakeTransporter() {
   // Fake service for testing
@@ -43,7 +43,6 @@ function gmailTransporter() {
 export async function sendEmail(message: Mail.Options) {
   const transporter = gmailTransporter();
   const info = await transporter.sendMail(message);
-  console.log("🚀 ~ sendEmail ~ info:", info)
 
   return info;
 }
@@ -53,5 +52,4 @@ export async function sendMailSendgrid(data: sgMail.MailDataRequired) {
   sgMail.setApiKey(apiKey);
 
   const result = await sgMail.send(data);
-  console.log("🚀 ~ sendMailSendgrid ~ result:", result)
 }
